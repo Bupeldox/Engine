@@ -1,0 +1,33 @@
+
+.cell,.slot{
+    height:30px;
+    width:30px;
+    position: absolute;
+}
+
+
+.slot{
+    border:1px solid #000;
+    
+}
+#board{
+    position: relative;
+}
+#pieces{
+    padding:1rem;
+    display: flex;
+    gap:0.5rem;
+}
+#pieces .piece{
+    position: relative;
+}
+#board .piece{
+    position: absolute;
+}
+.piece{
+    z-index: 1;
+}
+
+.piece .cell{
+    border:1px solid #c0e;
+}
