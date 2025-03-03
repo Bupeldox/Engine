@@ -1,8 +1,8 @@
 import { Piece } from "../pieces/Piece.js";
 import { ReadyToPickUpRenderer } from "../renderers/ReadyToPlaceRenderer.js";
-import Vec2 from "../utils/vec2.js";
+import Vec2 from "../../utils/vec2.js";
 import { PiecePlacer } from "./PiecePlacer.js";
-import { State, InteractionState } from "../utils/InteractionState.js";
+import { State, InteractionState } from "../../utils/InteractionState.js";
 
 
 export class PlaceablePiece {

@@ -1,7 +1,7 @@
 import { Piece } from "../pieces/Piece.js";
 import settings from "../options.js";
-import Vec2 from "../utils/vec2.js";
-import { countMatchingElements } from "../utils/2darray.js";
+import Vec2 from "../../utils/vec2.js";
+import { countMatchingElements } from "../../utils/2darray.js";
 
 export class PieceRenderer {
 
@@ -10,12 +10,15 @@ export class PieceRenderer {
     cells: HTMLElement[];
     height: number;
     width: number;
+    colour: string;
 
     constructor(piece: Piece) {
         this.piece = piece;
         this.cells = [];
         this.createElements();
         this.updateRotation();
+        this.colour = "#c0e8";
+        this.draw();
     }
     createElements() {
 
@@ -65,7 +68,11 @@ export class PieceRenderer {
     }
     draw() {
         this.setTL(this.piece.position);
-
+        if(this.colour){
+            this.cells.map(c=>{
+                c.style.backgroundColor = this.colour;
+            });
+        }
     }
     setTL(topLeft?: Vec2, pxVal: boolean = false) {
         if (!topLeft) {

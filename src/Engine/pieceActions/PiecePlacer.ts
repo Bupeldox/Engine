@@ -3,11 +3,11 @@ import { BoardSlot } from "../board/BoardSlot.js";
 
 import { Piece } from "../pieces/Piece.js";
 import { PlacingRenderer } from "../renderers/PlacingRenderer.js";
-import Vec2 from "../utils/vec2.js";
+import Vec2 from "../../utils/vec2.js";
 import game from "../index.js"
 import { PlaceablePiece } from "./PlaceablePiece.js";
-import { InteractionState, State } from "../utils/InteractionState.js";
-import {  rotate2dArray } from "../utils/2darray.js";
+import { InteractionState, State } from "../../utils/InteractionState.js";
+import {  rotate2dArray } from "../../utils/2darray.js";
 
 
 export class PiecePlacer {
@@ -25,7 +25,9 @@ export class PiecePlacer {
         //this.board = board;
         this.piece = piece;
         this.renderer = new PlacingRenderer(piece);
-        this.events();
+        requestAnimationFrame(()=>{
+            this.events();
+        })
     }
     events() {
         this.eventFuncs = {};
@@ -53,7 +55,7 @@ export class PiecePlacer {
         };
         document.addEventListener("keydown",this.eventFuncs.keyDown);
 
-        this.eventFuncs.board = game.board.registerOnSlotClick((slot:BoardSlot)=>{this.tryPlace(slot)})
+        this.eventFuncs.board = game.board.registerOnSlotClick((slot:Vec2)=>{this.tryPlace(slot)});
         this.eventFuncs.cancel = ()=>this.cancel();
         document.documentElement.addEventListener("click",this.eventFuncs.cancel);
     }
@@ -74,9 +76,9 @@ export class PiecePlacer {
         this.renderer.cancel();
         new PlaceablePiece(this.piece);
     }
-    tryPlace(slot:BoardSlot){
+    tryPlace(slot:Vec2){
         console.log(this.cellOffset);
-
+        
         if(game.board.placePiece(this.piece,slot,this.cellOffset)){
             this.removeEvents();
         }else{

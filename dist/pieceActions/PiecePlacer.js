@@ -17,7 +17,9 @@ export class PiecePlacer {
         //this.board = board;
         this.piece = piece;
         this.renderer = new PlacingRenderer(piece);
-        this.events();
+        requestAnimationFrame(() => {
+            this.events();
+        });
     }
     events() {
         this.eventFuncs = {};

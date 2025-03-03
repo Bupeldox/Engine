@@ -1,6 +1,6 @@
 
-import { ElementEventHandler } from "../utils/ElementEventHandler.js";
-import Vec2 from "../utils/vec2.js";
+import { ElementEventHandler } from "../../utils/ElementEventHandler.js";
+import Vec2 from "../../utils/vec2.js";
 
 export class BoardSlot {
     pos: Vec2;
@@ -8,6 +8,7 @@ export class BoardSlot {
     container: HTMLElement;
     element: any;
     piece: import("../pieces/Piece.js").Piece;
+    test: boolean;
     constructor(pos: Vec2, container: HTMLElement) {
         this.pos = pos;
         this.container = container;
@@ -28,6 +29,9 @@ export class BoardSlot {
             this.element.style.borderStyle="dashed";
         }else{
             this.element.style.borderStyle="solid";
+        }
+        if(this.test){
+            this.element.style.backgroundColor="#c0e";
         }
         const size = 30;
         this.element.style.left = (this.pos.x * size) + "px";

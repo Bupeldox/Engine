@@ -1,7 +1,7 @@
 
 import { Board } from "./board/Board.js";
 import { Piece } from "./pieces/Piece.js";
-import Vec2 from "./utils/vec2.js";
+import Vec2 from "../utils/vec2.js";
 import { PlaceablePiece } from "./pieceActions/PlaceablePiece.js";
 import { ElementPiece } from "./pieces/ElementPiece.js";
 import { BoardPiece } from "./pieces/BoardPiece.js";

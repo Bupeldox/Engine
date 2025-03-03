@@ -22,4 +22,12 @@ export class Piece {
         this.position = new Vec2(0, 0);
         this.renderer = new PieceRenderer(this);
     }
+    validatePlacement(board, tryPos) {
+        //throw new Error("Method not implemented.");
+        return false;
+    }
+    updateBoard(board, pos) {
+        this.position = pos;
+        //throw new Error("Method not implemented.");
+    }
 }

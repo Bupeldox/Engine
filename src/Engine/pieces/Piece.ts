@@ -1,8 +1,11 @@
-import Vec2 from "../utils/vec2.js";
+import Vec2 from "../../utils/vec2.js";
 import { PieceRenderer } from "../renderers/PieceRenderer.js";
+import { BoardSlot } from "../board/BoardSlot.js";
+import { Board } from "../board/Board.js";
 
 
 export abstract class Piece {
+   
     /**
      *
      */
@@ -26,5 +29,13 @@ export abstract class Piece {
         this.position = new Vec2(0,0);
         this.renderer = new PieceRenderer(this);
         
+    }
+    validatePlacement(board: Board, tryPos: Vec2): Boolean {
+        //throw new Error("Method not implemented.");
+        return false;
+    }
+    updateBoard(board: Board,pos:Vec2) {
+        this.position = pos;
+        //throw new Error("Method not implemented.");
     }
 }

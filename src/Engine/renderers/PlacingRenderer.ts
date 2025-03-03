@@ -1,5 +1,5 @@
 import { Piece } from "../pieces/Piece.js";
-import Vec2 from "../utils/vec2.js";
+import Vec2 from "../../utils/vec2.js";
 
 export class PlacingRenderer {
     piece: Piece

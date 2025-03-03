@@ -5,6 +5,7 @@ export class BoardSlot {
     container;
     element;
     piece;
+    test;
     constructor(pos, container) {
         this.pos = pos;
         this.container = container;
@@ -26,6 +27,9 @@ export class BoardSlot {
         }
         else {
             this.element.style.borderStyle = "solid";
+        }
+        if (this.test) {
+            this.element.style.backgroundColor = "#c0e";
         }
         const size = 30;
         this.element.style.left = (this.pos.x * size) + "px";

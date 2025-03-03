@@ -7,11 +7,14 @@ export class PieceRenderer {
     cells;
     height;
     width;
+    colour;
     constructor(piece) {
         this.piece = piece;
         this.cells = [];
         this.createElements();
         this.updateRotation();
+        this.colour = "#c0e8";
+        this.draw();
     }
     createElements() {
         this.element = document.createElement("div");
@@ -58,6 +61,11 @@ export class PieceRenderer {
     }
     draw() {
         this.setTL(this.piece.position);
+        if (this.colour) {
+            this.cells.map(c => {
+                c.style.backgroundColor = this.colour;
+            });
+        }
     }
     setTL(topLeft, pxVal = false) {
         if (!topLeft) {
