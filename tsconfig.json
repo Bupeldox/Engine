@@ -5,6 +5,6 @@
         "target": "es2022",
     },
     "files": [
-        "./src/index.ts"
+        "src/Engine/index.ts"
     ]
 }

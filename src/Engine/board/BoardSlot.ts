@@ -7,7 +7,7 @@ export class BoardSlot {
     eventHandler: ElementEventHandler;
     container: HTMLElement;
     element: any;
-    piece: import("c:/Users/Bupeldox V2/Desktop/projkects/ReactorGameIdea/src/pieces/Piece").Piece;
+    piece: import("../pieces/Piece.js").Piece;
     constructor(pos: Vec2, container: HTMLElement) {
         this.pos = pos;
         this.container = container;
