@@ -11,7 +11,13 @@
     <link rel="stylesheet" href="styleDriving.css">
 </head>
 <body>
-    <div id="drivingGame" style="height:500px;width:500px; position:relative;">
+    <div class="drive">
+    <div id="drivingGame" style="height:500px;width:500px; max-width:100%; position:relative;">
+    </div>
+    <div class="vehicleControls">
+        <input id="throttle" type="range" min="0" max="1" value="0" step="0.01">
+        <input id="steering" type="range" min="-1" max="1" value="0" step="0.01">
+    </div>
     </div>
     <div id="container">
         <div id="pieces"></div>

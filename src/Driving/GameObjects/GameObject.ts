@@ -22,7 +22,9 @@ export abstract class GameObject {
     }
     delete(){
         var ind = gameToAddTo.gameObjects.findIndex(i=>i.id == this.id);
-        gameToAddTo.gameObjects.splice(ind,1);
+        if(ind!=-1){
+            gameToAddTo.gameObjects.splice(ind,1);
+        }
         if(this.element){
             this.element.remove();
         }
@@ -36,7 +38,7 @@ export abstract class GameObject {
         if(this.element){
             var p = camera.getPosInView(this.pos);
             this.element.style.top = p.y+"px";
-            this.element.style.left = p.y+"px";
+            this.element.style.left = p.x+"px";
         }
     }
 }

@@ -42,7 +42,7 @@ export class Camera extends GameObject {
 
     getView():View {
         return new View(
-            this.pos.sub(this.elHw.times(1 / this.scale)),
+            this.pos.sub(this.elHw.times(1 / this.scale).times(0.5)),
             this.elHw.times(1 / this.scale)
         );
     }

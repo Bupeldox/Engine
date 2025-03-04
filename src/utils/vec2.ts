@@ -30,6 +30,9 @@ export default class Vec2 {
 		}
 	}
 	static fromPolar(r,theta){
+		if(r==0){
+			return new Vec2(0,0);
+		}
 		return new Vec2(r*Math.sin(theta),r*Math.cos(theta));
 	}
 	toPolar(){
