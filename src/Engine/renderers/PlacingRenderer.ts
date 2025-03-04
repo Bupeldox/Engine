@@ -3,8 +3,9 @@ import Vec2 from "../../utils/vec2.js";
 
 export class PlacingRenderer {
     piece: Piece
-    constructor(piece: Piece) {
+    constructor(piece: Piece,container:HTMLElement) {
         this.piece = piece;
+        container.append(this.piece.renderer.element);
     }
     draw() {
         var basePos = new Vec2();

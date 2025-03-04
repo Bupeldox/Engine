@@ -1,6 +1,4 @@
 import { Board } from "../board/Board.js";
-import { BoardSlot } from "../board/BoardSlot.js";
-
 import { Piece } from "../pieces/Piece.js";
 import { PlacingRenderer } from "../renderers/PlacingRenderer.js";
 import Vec2 from "../../utils/vec2.js";
@@ -17,14 +15,20 @@ export class PiecePlacer {
     board:Board;
     eventFuncs:any;
     cellOffset: Vec2;
-    constructor(piece: Piece, cursorOffset: Vec2, cellOffset:Vec2) {
-        this.cursorOffset = cursorOffset;
+    prevPos: Vec2;
+    onPlace: Function;
+    constructor(piece: Piece, cursorOffset: Vec2, cellOffset:Vec2,prevPos:Vec2,onPlace:Function) {
+        this.onPlace = onPlace;
+        var boardPos = Vec2.fromBR(game.board.boardElement.getBoundingClientRect())
+        var elPos = Vec2.fromBR(piece.renderer.element.getBoundingClientRect())
+
+        this.cursorOffset = boardPos.add(cursorOffset);
         this.cellOffset = cellOffset;
-        
+        this.prevPos = prevPos;
 
         //this.board = board;
         this.piece = piece;
-        this.renderer = new PlacingRenderer(piece);
+        this.renderer = new PlacingRenderer(piece,game.board.boardElement);
         requestAnimationFrame(()=>{
             this.events();
         })
@@ -74,13 +78,15 @@ export class PiecePlacer {
         }
         this.removeEvents();
         this.renderer.cancel();
-        new PlaceablePiece(this.piece);
+        new PlaceablePiece(this.piece,this.prevPos,this.onPlace);
     }
     tryPlace(slot:Vec2){
         console.log(this.cellOffset);
         
         if(game.board.placePiece(this.piece,slot,this.cellOffset)){
+            this.onPlace();
             this.removeEvents();
+
         }else{
             this.cancel();
         }

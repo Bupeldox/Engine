@@ -23,15 +23,13 @@ class Game{
     board:Board;
     pieces:Piece[];
     placeablePieces: any;
+    onChange: (p: any) => void;
     constructor(){
         this.placeablePieces = [];
         this.board = new Board();
 
         var t = [
-            [1,1,1,0,0,1,0],
-            [1,1,1,1,1,1,0],
-            [1,1,1,1,1,0,0],
-            [0,0,1,1,0,0,0],
+            [1]
         ]
         t.map((a,y)=>{
             a.map((v,x)=>{
@@ -39,14 +37,7 @@ class Game{
                     this.board.addSlot(new Vec2(x,y));
                 }
             })
-        })
-
-        
-        new PlaceablePiece(new ElementPiece());
-        new PlaceablePiece(new ElementPiece(shapes.L));
-        new PlaceablePiece(new ElementPiece());
-        new PlaceablePiece(new BoardPiece());
-
+        });
     }
 }
 const game = new Game();

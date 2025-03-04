@@ -1,6 +1,5 @@
 
 import Vec2 from "../../utils/vec2.js";
-import { Camera } from "./Camera.js";
 import { GameObject } from "./GameObject.js";
 
 class InputHandler{

@@ -20,9 +20,7 @@ export class Scatter extends GameObject{
         var offset = seededRandom.vecFromVec(this.basePos,1).times(spacing/30);
         this.pos = this.basePos.add(offset);
         this.element.style.transform="rotate("+
-        ((
-            seededRandom.randomFromVec(this.basePos)*2
-        )-1)*10
+            (seededRandom.randomFromVec(this.basePos)*10)
         +"deg)";
         
         this.getGame().container.append(this.element);

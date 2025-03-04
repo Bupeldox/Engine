@@ -1,5 +1,4 @@
 
-import { BoardData } from "./Data/BoardData.js";
 import { DrivingGame } from "./Driving/DrivingGame.js";
 import { Inventory } from "./Inventory/inventory.js";
 

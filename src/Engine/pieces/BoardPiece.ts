@@ -14,7 +14,7 @@ export class BoardPiece extends Piece {
     }
     validatePlacement(board: Board, tryPos: Vec2): Boolean {
         //if any are adjacent to any of the pieces in this piece
-        debugger;
+        
         function isAdjacent(point, pointsList) {
             const { x, y } = point;
             return pointsList.some(({ x: px, y: py }) =>
@@ -25,6 +25,7 @@ export class BoardPiece extends Piece {
 
         var boardPoses = board.slots.map(i => i.pos);
         var valid = true;
+        var hasAdjacent = false;
         this.shape.map((arr, x) => {
             arr.map((v, y) => {
                 if (!v || !valid) { return; }
@@ -32,13 +33,16 @@ export class BoardPiece extends Piece {
                 var p = new Vec2(x, y).add(tryPos);
 
                 if (boardPoses.some(i => i.x == p.x && i.y == p.y)) {
+                    valid=false;
                     return false;
                 }
-                if (!isAdjacent(p, boardPoses)) {
+                if (isAdjacent(p, boardPoses) || hasAdjacent) {
+                    hasAdjacent = true;
                     return false;
                 }
             });
         });
+        valid = valid && hasAdjacent;
         return valid;
     }
     updateBoard(board: Board, pos: Vec2): void {

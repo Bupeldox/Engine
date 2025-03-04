@@ -1,7 +1,8 @@
+import game from "../index.js";
 import { Piece } from "../pieces/Piece.js";
 
 
-const boardElement = document.getElementById("board")??new HTMLElement();
+const boardElement = game.board.boardElement;
 
 export class PlacedPiece{
     piece: Piece;
@@ -10,6 +11,7 @@ export class PlacedPiece{
         this.piece = piece;
         boardElement.append(this.piece.renderer.element);
         this.draw();
+        
     }
     draw(){
         var el = this.piece.renderer.draw();

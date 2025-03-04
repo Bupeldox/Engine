@@ -17,7 +17,7 @@ export class Board {
     width: number = 0;
     boardOffset: Vec2;
 
-    constructor(updateProps:Function) {
+    constructor(updateProps?:Function) {
         this.boardElement = document.getElementById("board");
         this.slotClickListeners = [];
         this.slots = [];

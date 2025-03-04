@@ -35,6 +35,9 @@ export default class Vec2 {
 		}
 		return new Vec2(r*Math.sin(theta),r*Math.cos(theta));
 	}
+	static fromBR(boundingRect){
+		return new Vec2(boundingRect.left,boundingRect.top);
+	}
 	toPolar(){
 		return {
 			theta:this.angle(new Vec2(0,1)),

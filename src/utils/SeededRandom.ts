@@ -1,19 +1,33 @@
 import Vec2 from "./vec2.js";
 
+function hashVec2(v, salt = 0) {
+    function hash(x, y, salt) {
+        let n = Math.sin(x * 12.9898 + y * 78.233 + salt * 45.6789) * 43758.5453;
+        return n - Math.floor(n); // Keep only fractional part
+    }
 
-class SeededRandom{
-    vecFromVec(pos: Vec2, salt: number): Vec2 {
-        var p = pos.add(new Vec2(salt*1.121324234,salt*1.5298375));
+    return {
+        x: hash(v.x, v.y, salt) * 2 - 1,  // Scale to range [-1, 1]
+        y: hash(v.y, v.x, salt) * 2 - 1
+    };
+}
+
+    
+    class SeededRandom{
+    vecFromVec(pos: Vec2, salt=1): Vec2 {
+
+        var p = hashVec2(pos,salt);
+
         return Vec2.fromPolar(
-            this.randomFromVec(p)*Math.PI*2,
-            this.randomFromVec(p.add(new Vec2(salt,salt)))
+            p.x*Math.PI*2,
+            p.y**2
         );
     }
     random(seed:number):number{
-        return ((seed * Math.E) / Math.PI)%1;
+        return hashVec2(new Vec2(-999,seed)).x;
     }
-    randomFromVec(seed:Vec2):number{
-        return ((seed.x*10.2*seed.y)/Math.PI)%1;
+    randomFromVec(seed:Vec2,salt=1):number{
+        return hashVec2(seed,salt).x;
     }
 }
 
