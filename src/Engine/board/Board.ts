@@ -3,6 +3,7 @@ import Vec2 from "../../utils/vec2.js";
 import { BoardSlot } from "./BoardSlot.js";
 import settings from "../options.js";
 import {BoardData} from "../../Data/BoardData.js"
+import { ElementPiece } from "../pieces/ElementPiece.js";
 
 export class Board {
     setup(boardData: BoardData) {
@@ -16,13 +17,19 @@ export class Board {
     height: number = 0;
     width: number = 0;
     boardOffset: Vec2;
+    pieces:ElementPiece[];
+    onChange:Function;
 
     constructor(updateProps?:Function) {
         this.boardElement = document.getElementById("board");
         this.slotClickListeners = [];
         this.slots = [];
+        this.pieces = [];
         this.boardOffset = new Vec2(0,0);
         this.events();
+    }
+    changed(){
+        this.onChange(this.pieces);
     }
     events() {
         document.body.addEventListener("click", (e) => {

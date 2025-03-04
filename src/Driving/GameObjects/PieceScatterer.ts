@@ -35,7 +35,7 @@ export class PieceScatterer extends GameObject {
                 spa.x = Math.floor(spa.x);
                 spa.y = Math.floor(spa.y);
                 spa =  spa.times(spacing);
-                if(Math.abs(seededRandom.randomFromVec(spa,-6))<0.01){
+                if(Math.abs(seededRandom.randomFromVec(spa,-6))<0.05){
                     expectedScatters.push(spa);
                 }
             },

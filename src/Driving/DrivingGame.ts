@@ -51,12 +51,12 @@ export class DrivingGame{
         new PlaceablePiece(new ElementPiece(shapes[1]),new Vec2(-100,0),()=>{});
 
 
-        game.onChange=(p)=>this.onEngineChange(p);
+        game.board.onChange=(p:any)=>{this.onEngineChange(p)};
 
     }
-    onEngineChange(p:any){
+    onEngineChange(p:ElementPiece[]){
         
-        this.vehicle.updateMaxSpeed(p.pieces.length);
+        this.vehicle.updateMaxSpeed(p.length);
     }
     update(dt:number){
         this.gameObjects.map(i=>i.update(dt));
