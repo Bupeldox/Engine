@@ -18,7 +18,7 @@ export class View{
     addPadding(real:number){
         var p  = new Vec2(real,real);
         this.topCorner.add(p);
-        this.hw.add(p.times(2));
+        this.hw = this.hw.add(p.times(2));
     }
 }
 
