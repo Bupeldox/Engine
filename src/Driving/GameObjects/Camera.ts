@@ -15,6 +15,11 @@ export class View{
         var rel = pos.sub(this.topCorner);
         return rel.x<this.hw.x && rel.y<this.hw.y && rel.x>0 && rel.y>0;
     }
+    addPadding(real:number){
+        var p  = new Vec2(real,real);
+        this.topCorner.add(p);
+        this.hw.add(p.times(2));
+    }
 }
 
 export class Camera extends GameObject {

@@ -31,11 +31,9 @@ export abstract class Piece {
         
     }
     validatePlacement(board: Board, tryPos: Vec2): Boolean {
-        //throw new Error("Method not implemented.");
         return false;
     }
     updateBoard(board: Board,pos:Vec2) {
         this.position = pos;
-        //throw new Error("Method not implemented.");
     }
 }

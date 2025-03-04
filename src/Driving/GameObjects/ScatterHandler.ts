@@ -1,25 +1,37 @@
 import Vec2 from "../../utils/vec2.js";
 import { Camera } from "./Camera.js";
 import { GameObject } from "./GameObject.js";
+import { seededRandom } from "../../utils/SeededRandom.js"
 
+const spacing = 100;
 
 export class Scatter extends GameObject{
+    basePos: Vec2;
     constructor(pos:Vec2) {
         super();
-        this.pos = pos;
+        this.basePos = pos;
+        
         this.createElement();
     }
     createElement(){
         this.element = document.createElement("div");
         this.element.classList.add("scatter");
         this.element.classList.add("gameObject");
+        var offset = seededRandom.vecFromVec(this.basePos,1).times(spacing/30);
+        this.pos = this.basePos.add(offset);
+        this.element.style.transform="rotate("+
+        ((
+            seededRandom.randomFromVec(this.basePos)*2
+        )-1)*10
+        +"deg)";
+        
         this.getGame().container.append(this.element);
     }
 }
 
 export class ScatterHandler extends GameObject {
 
-    scatters: GameObject[];
+    scatters: Scatter[];
     camera: Camera;
 
     constructor(camera: Camera) {
@@ -30,8 +42,9 @@ export class ScatterHandler extends GameObject {
 
     update(dt: number) {
         var expectedScatters: Vec2[] = [];
-        var spacing = 100;
+        
         var view = this.camera.getView();
+        view.addPadding(spacing);
         
         Vec2.itterate(
             view.topCorner,
@@ -45,9 +58,13 @@ export class ScatterHandler extends GameObject {
             new Vec2(spacing, spacing)
         );
 
-        var notOk: GameObject[] = this.scatters.filter(i => !expectedScatters.some(e => e.x == i.pos.x && e.y == i.pos.y));
-        var missing = expectedScatters.filter(e => !this.scatters.some(i => e.x == i.pos.x && e.y == i.pos.y));
-        notOk.map(i => i.delete());
+        var notOk: Scatter[] = this.scatters.filter(i => !expectedScatters.some(e => e.x == i.basePos.x && e.y == i.basePos.y));
+        var missing = expectedScatters.filter(e => !this.scatters.some(i => e.x == i.basePos.x && e.y == i.basePos.y));
+        notOk.map(i => {
+            i.delete()
+            var ind = this.scatters.findIndex(e=>e.id == i.id);
+            this.scatters.splice(ind,1);
+        });
         missing.map(i => {
             this.scatters.push(new Scatter(i));
         });

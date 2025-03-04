@@ -19,17 +19,20 @@ export class DrivingGame{
         this.stop = false;
         this.gameObjects = [];
         setGameToAddGameObjectsTo(this);
+        
         this.container = document.getElementById("drivingGame")??new HTMLElement();
+
         this.camera = new Camera(this.container);
+        
         this.vehicle = new Vehicle(this.container);
         this.scatterHandler = new ScatterHandler(this.camera);
+        
         this.camera.follow(this.vehicle);
 
         this.loop(0);
     }
 
     update(dt:number){
-        //Procedurally spawn: PiecePickups, Scatter
         this.gameObjects.map(i=>i.update(dt));
     }
     draw(){
