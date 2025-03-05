@@ -31,6 +31,8 @@ export class Vehicle extends GameObject{
     speed:number;
     maxSpeed:number;
     input:InputHandler;
+    targetSpeed: number;
+    acceleration:number;
 
     constructor(containerElement:HTMLElement){
         super();
@@ -39,6 +41,7 @@ export class Vehicle extends GameObject{
         this.input = new InputHandler();
         this.heading = 0;
         this.speed = 0;
+        this.acceleration=0.1;
         this.updateMaxSpeed(1);
     }
     createElement(container:HTMLElement){
@@ -50,17 +53,26 @@ export class Vehicle extends GameObject{
     }
     updateMaxSpeed(abs){
         this.input.throttle.setAttribute("max",abs);
+        this.acceleration = abs*0.1;
     }
     updateThrottle(val){
-        this.speed=val;
+        this.targetSpeed = val;
     }
     updateHeading(delta:number){
-        this.heading+=delta*4/180;
+        this.heading+=this.speed*delta*4/180;
     }
     update(dt:number){
         var inp = this.input.get();
         this.updateHeading(inp.steering*dt);
         this.updateThrottle(inp.throttle);
+        
+        var maxDeltaSpeed=this.acceleration*(dt/1000);
+        if(Math.abs(this.speed-this.targetSpeed)<maxDeltaSpeed){
+            this.speed = this.targetSpeed;
+        }else{
+            this.speed += Math.sign(this.targetSpeed-this.speed)*(maxDeltaSpeed);
+        }
+
         var deltaP = Vec2.fromPolar(-this.speed*dt*0.03,-Math.PI*(this.heading/180));
         this.pos = this.pos.add(deltaP);
     }
