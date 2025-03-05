@@ -1,0 +1,11 @@
+import { DrivingGame } from "./Driving/DrivingGame.js";
+import { Inventory } from "./Inventory/inventory.js";
+export class Game {
+    drivingGame;
+    inventory;
+    constructor() {
+        //get Saved data
+        this.drivingGame = new DrivingGame();
+        this.inventory = new Inventory();
+    }
+}
