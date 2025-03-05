@@ -50,8 +50,8 @@ export class Board {
         if (-this.boardOffset.y > slot.pos.y) {
             this.boardOffset.y = -slot.pos.y;
         }
-        this.boardElement.style.marginTop = +this.boardOffset.y * settings.cellSize + "px";
-        this.boardElement.style.marginLeft = +this.boardOffset.x * settings.cellSize + "px";
+        this.boardElement.style.marginTop = (settings.cellSize * 2) + this.boardOffset.y * settings.cellSize + "px";
+        this.boardElement.style.marginLeft = (settings.cellSize * 2) + this.boardOffset.x * settings.cellSize + "px";
         this.boardElement.style.height = (this.height + 1) * settings.cellSize + "px";
         this.boardElement.style.width = (this.width + 1) * settings.cellSize + "px";
     }
