@@ -31,12 +31,16 @@ export class InputMapper {
             "Interact": "e"
         };
     }
-    getMoveDir() {
+    getMoveDir(normalised = false) {
         var total = new Vec2(0, 0);
         var inputs = this.keysHandler.keysDown.filter(i => Object.keys(this.moveDirMap).includes(i));
         inputs.map((i) => total = total.add(this.moveDirMap[i]));
-        if (total.magnitude() != 0) {
+        if (normalised && total.magnitude() != 0) {
             total = total.normalised();
+        }
+        else {
+            total.x = Math.min(1, Math.max(-1, total.x));
+            total.y = Math.min(1, Math.max(-1, total.y));
         }
         return total;
     }

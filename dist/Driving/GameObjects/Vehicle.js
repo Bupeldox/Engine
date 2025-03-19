@@ -1,9 +1,12 @@
 import Vec2 from "../../utils/vec2.js";
 import { GameObject } from "./GameObject.js";
+import { InputMapper } from "../../utils/InputMapper.js";
 class InputHandler {
     steering;
     throttle;
+    inputHandler;
     constructor() {
+        this.inputHandler = new InputMapper();
         this.steering = document.getElementById("steering");
         this.throttle = document.getElementById("throttle");
         this.events();
@@ -15,11 +18,26 @@ class InputHandler {
             }
         });
     }
+    previouslyKBDControlled;
     get() {
-        return {
+        var moveDir = this.inputHandler.getMoveDir();
+        if (moveDir.magnitude() > 0) {
+            this.previouslyKBDControlled = true;
+            if (moveDir.y < 0) {
+                this.throttle.value = -moveDir.y * (+document.getElementById("throttle").max);
+            }
+            this.steering.value = moveDir.x;
+        }
+        else if (this.previouslyKBDControlled) {
+            this.previouslyKBDControlled = false;
+            this.steering.value = 0;
+            this.throttle.value = 0;
+        }
+        var res = {
             steering: +this.steering.value,
             throttle: +this.throttle.value
         };
+        return res;
     }
 }
 export class Vehicle extends GameObject {

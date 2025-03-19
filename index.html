@@ -1,8 +1,6 @@
-
-
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,26 +8,42 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="styleDriving.css">
 </head>
+
 <body>
     <div class="drive">
-    <div id="drivingGame" style="height:500px;width:500px; max-width:100%; position:relative; overflow: hidden;">
+        <div id="drivingGame" style="height:500px;width:500px; max-width:100%; position:relative; overflow: hidden;">
+        </div>
+        <div class="vehicleControls" data-hoverInfo="Vehicle controls">
+            <div>
+                <label for="throttle" style="width: 10rem; max-width: 100%; display: inline-block;;">Throttle
+                    (w/up)</label>
+                <input id="throttle" type="range" min="0" max="1" value="0" step="0.01">
+            </div>
+            <label for="steering" style="width: 10rem; max-width: 100%; display: inline-block;;">Steering
+                (a,d/left,right)</label>
+            <input id="steering" type="range" min="-1" max="1" value="0" step="0.01">
+        </div>
     </div>
-    <div class="vehicleControls">
-        <input id="throttle" type="range" min="0" max="1" value="0" step="0.01">
-        <input id="steering" type="range" min="-1" max="1" value="0" step="0.01">
+    <h2>
+        Engine
+    </h2>
+    <div>
+        <p>
+        Info: 
+        <span id="hoverInfo">Hover over something for info</span>
+        </p>
     </div>
-    </div>
-    <div id="container">
+    <div id="container" data-hoverInfo="Your engine, purple pieces make it go faster, brown gives you more space.">
         <div id="pieces"></div>
         <div id="board"></div>
     </div>
-        
+
     <script type="module">
         import { game } from "./dist/index.js"
-        
+
         window.game = game;
     </script>
-    
+
 </body>
 
 </html>
